@@ -35,7 +35,7 @@ export default async function ProductDetailsPage({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div className="aspect-square relative overflow-hidden rounded-3xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl">
             <img 
-              src={product.images[0]} 
+              src="/product.png" 
               alt={product.title}
               className="object-contain w-full h-full p-8"
             />

@@ -23,11 +23,11 @@ export default async function ProductsPage() {
               href={`/products/${product.id}`}
               className="group flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden transition-all hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-2xl"
             >
-              <div className="aspect-square relative overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+              <div className="aspect-square relative overflow-hidden bg-zinc-100 dark:bg-zinc-900">
                 <img 
-                  src={product.thumbnail} 
+                  src="/product.png" 
                   alt={product.title}
-                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 p-4"
                 />
               </div>
               <div className="p-6">
