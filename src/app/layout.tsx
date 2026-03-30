@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-import { getSession } from "@/lib/auth";
+import { auth } from "@/auth";
 import LogoutButton from "@/components/LogoutButton";
+import SessionWrapper from "@/components/SessionWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +26,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getSession();
+  const session = await auth();
 
   return (
     <html
@@ -34,37 +35,39 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
-        <header className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80 transition-all">
-          <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-blue-600 transition-transform group-hover:scale-110 shadow-lg shadow-blue-600/20">
-                <img 
-                  src="/logoecom.png" 
-                  alt="Products Store Logo" 
-                  className="h-full w-full object-cover"
-                />
+        <SessionWrapper>
+          <header className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80 transition-all">
+            <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+              <Link href="/" className="flex items-center gap-3 group">
+                <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-blue-600 transition-transform group-hover:scale-110 shadow-lg shadow-blue-600/20">
+                  <img 
+                    src="/logoecom.png" 
+                    alt="Products Store Logo" 
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <span className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+                  Products Store
+                </span>
+              </Link>
+
+              <div className="flex items-center gap-8">
+                {session && (
+                  <>
+                    <nav className="hidden items-center gap-8 md:flex">
+                      <Link href="/" className="text-sm font-bold uppercase tracking-widest text-zinc-500 hover:text-blue-600 transition-all">Home</Link>
+                      <Link href="/products" className="text-sm font-bold uppercase tracking-widest text-zinc-500 hover:text-blue-600 transition-all">All Products</Link>
+                    </nav>
+                    <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800 hidden md:block"></div>
+                    <LogoutButton />
+                  </>
+                )}
               </div>
-              <span className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-                Products Store
-              </span>
-            </Link>
-
-            <div className="flex items-center gap-8">
-              {session && (
-                <>
-                  <nav className="hidden items-center gap-8 md:flex">
-                    <Link href="/" className="text-sm font-bold uppercase tracking-widest text-zinc-500 hover:text-blue-600 transition-all">Home</Link>
-                    <Link href="/products" className="text-sm font-bold uppercase tracking-widest text-zinc-500 hover:text-blue-600 transition-all">All Products</Link>
-                  </nav>
-                  <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800 hidden md:block"></div>
-                  <LogoutButton />
-                </>
-              )}
             </div>
-          </div>
-        </header>
+          </header>
 
-        <main className="flex-1">{children}</main>
+          <main className="flex-1">{children}</main>
+        </SessionWrapper>
 
         <footer className="border-t border-zinc-200 bg-white py-12 dark:border-zinc-800 dark:bg-zinc-950">
           <div className="mx-auto max-w-7xl px-6">
