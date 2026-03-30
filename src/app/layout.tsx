@@ -28,7 +28,32 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
+        <header className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
+          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-lg bg-blue-600"></div>
+              <span className="text-xl font-bold tracking-tight">Products Store</span>
+            </div>
+            <nav className="hidden items-center gap-8 md:flex">
+              <a href="/" className="text-sm font-medium hover:text-blue-600 transition-colors">Home</a>
+              <a href="/products" className="text-sm font-medium hover:text-blue-600 transition-colors">Products</a>
+            </nav>
+          </div>
+        </header>
+
+        <main className="flex-1">{children}</main>
+
+        <footer className="border-t border-zinc-200 bg-white py-12 dark:border-zinc-800 dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+              <div className="flex items-center gap-2 text-zinc-500">
+                <span className="text-sm">© 2026 Products Store. All rights reserved.</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </body>
     </html>
   );
 }
