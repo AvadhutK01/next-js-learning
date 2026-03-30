@@ -1,6 +1,21 @@
 import Link from "next/link";
 import axios from "axios";
 import { Product } from "@/types/product";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const response = await axios.get<Product>(`https://dummyjson.com/products/${id}`);
+  const product = response.data;
+  
+  return {
+    title: `${product.title} - Products Store`,
+  };
+}
 
 export default async function ProductDetailsPage({
   params,

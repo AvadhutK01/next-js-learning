@@ -1,6 +1,11 @@
 import Link from "next/link";
 import axios from "axios";
 import { ProductsResponse } from "@/types/product";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Products Store - Products List",
+};
 
 export const revalidate = 60;
 
