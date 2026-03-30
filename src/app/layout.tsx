@@ -32,10 +32,18 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
         <header className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-blue-600"></div>
-              <span className="text-xl font-bold tracking-tight">Products Store</span>
-            </div>
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-blue-600 transition-transform group-hover:scale-110 shadow-lg shadow-blue-600/20">
+                <img 
+                  src="/logoecom.png" 
+                  alt="Products Store Logo" 
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <span className="text-xl font-black tracking-tight text-zinc-900 dark:text-zinc-50 uppercase italic">
+                Store<span className="text-blue-600">Hub</span>
+              </span>
+            </Link>
             <nav className="hidden items-center gap-8 md:flex">
               <Link href="/" className="text-sm font-medium hover:text-blue-600 transition-colors">Home</Link>
               <Link href="/products" className="text-sm font-medium hover:text-blue-600 transition-colors">Products</Link>
